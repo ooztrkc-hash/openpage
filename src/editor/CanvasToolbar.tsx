@@ -362,7 +362,20 @@ async function handlePublish() {
         </button>
 
         <div className="w-px h-5 bg-border-default mx-1" />
-
+<button
+  onClick={handlePublish}
+  disabled={publishing}
+  className="h-7 px-3 rounded-lg bg-blue-500 text-white text-[11.5px] font-semibold hover:bg-blue-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+>
+  {publishing ? (
+    <>
+      <Loader2 size={12} className="animate-spin" />
+      <span>Publishing...</span>
+    </>
+  ) : (
+    <span>Publish</span>
+  )}
+</button>
         <button
           onClick={handleExport}
           disabled={exporting}
