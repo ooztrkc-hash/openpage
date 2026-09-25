@@ -192,7 +192,27 @@ const [publishing, setPublishing] = useState(false)
       setExporting(false)
     }
   }
+  
+async function handlePublish() {
+  setPublishing(true)
 
+  try {
+    const result = await publishSite({
+      config,
+      projectName,
+      settings: activeProject?.settings,
+    })
+
+    toast.success(`Published successfully: ${result.liveUrl}`)
+
+    window.open(result.liveUrl, '_blank', 'noopener,noreferrer')
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Publish failed'
+    toast.error(message)
+  } finally {
+    setPublishing(false)
+  }
+}
   return (
     <div className="h-10 bg-bg-1 border-b border-border-default flex items-center px-3 gap-1">
       {/* Breadcrumb */}
