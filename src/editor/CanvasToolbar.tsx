@@ -20,7 +20,7 @@ import { useConfigStore } from '@/store/configStore'
 import { useProjectsStore } from '@/store/projectsStore'
 import type { PageConfig } from '@/blocks/types'
 import { exportToHTML, downloadHTML } from '@/lib/export-html'
-
+import { publishSite } from '@/lib/publish-site'
 const viewports: { value: Viewport; icon: typeof Monitor; label: string }[] = [
   { value: 'desktop', icon: Monitor, label: 'Desktop' },
   { value: 'tablet', icon: Tablet, label: 'Tablet' },
@@ -175,7 +175,7 @@ export function CanvasToolbar() {
   const config = useConfigStore((s) => s.config)
   const [showAddPage, setShowAddPage] = useState(false)
   const [exporting, setExporting] = useState(false)
-
+const [publishing, setPublishing] = useState(false)
   const activeProject = activeProjectId ? projects.find((p) => p.id === activeProjectId) : null
   const projectName = activeProject?.name || configName
 
